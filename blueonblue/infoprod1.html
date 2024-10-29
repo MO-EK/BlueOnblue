@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - blueOnblue Thrift Shop</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Baskerville Old Face', serif;
+        }
+
+        /* Main Colors */
+        :root {
+            --primary-color: #acc7e2;
+            --accent-color: #2f3a64;
+            --text-color: #317bb4;
+            --bg-light: #eef4fb;
+            --highlight-color: #3a69a7;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header and Footer */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--highlight-color) 100%);
+            color: white;
+            padding: 50px 10px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 3px solid white;
+        }
+
+        .since {
+            font-size: 0.9em;
+            color: var(--bg-light);
+            font-style: italic;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #f1f1f1;
+            margin-top: 10px;
+        }
+
+        header h2 {
+            font-size: 1.4em;
+            color: white;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: var(--accent-color);
+            padding: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--highlight-color);
+        }
+
+        nav a:hover {
+            background-color: white;
+            color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        /* Product Section */
+        .product-container {
+            display: flex;
+            max-width: 900px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 20px;
+            margin: 20px auto;
+        }
+
+        .product-images {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-images img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+            cursor: pointer; /* Indicate the image is clickable */
+        }
+
+        .product-images img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-details h1 {
+            color: var(--accent-color);
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .product-details ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: var(--accent-color);
+        }
+
+        .buy-button {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .order-form,
+        .payment-options {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .order-form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid var(--highlight-color);
+            border-radius: 5px;
+        }
+
+        .payment-options button {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Zoomed Image Overlay */
+        .zoomed-image {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .zoomed-image img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            color: white;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="blue.png" alt="blueOnblue Logo" class="logo">
+            <span class="since">Since 2021...</span>
+        </div>
+        <div>
+            <h1>blueOnblue Thrift Shop</h1>
+            <p>where quality meets expectation...</p>
+            <h2>Product Details</h2>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="review.html">Reviews</a>
+        <a href="service.html">Services</a>
+    </nav>
+
+    <!-- Product Details Section -->
+    <div class="product-container">
+        <div class="product-images">
+            <img src="prod1.png" alt="Product Image 1" onclick="zoomImage(this)">
+            <img src="prod1 img2.png" alt="Product Image 2" onclick="zoomImage(this)">
+        </div>
+
+        <div class="product-details">
+            <h1>Red top</h1>
+            <ul>
+                <li>High-quality fabric</li>
+                <li>Eco-friendly production</li>
+                <li>Comfortable and stylish</li>
+                <li>Available at RS-...... only/-</li>
+            </ul>
+            <button class="buy-button" onclick="showOrderForm()">Buy Now</button>
+
+            <div class="order-form" id="orderForm">
+                <h3>Delivery Information</h3>
+                <label>Name:</label>
+                <input type="text" id="userName" placeholder="Enter your name" required>
+                <label>Address:</label>
+                <input type="text" id="address" placeholder="Enter your address" required>
+                <label>Phone Number:</label>
+                <input type="text" id="phone" placeholder="Enter your phone number" required>
+                <button class="buy-button" onclick="showPaymentOptions()">OK</button>
+            </div>
+
+            <div class="payment-options" id="paymentOptions">
+                <h3>Select Payment Method</h3>
+                <button onclick="handleCOD()">Cash on Delivery (COD)</button>
+                <button onclick="alert('eSewa Selected')">eSewa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zoomed Image Overlay -->
+    <div class="zoomed-image" id="zoomedImage" onclick="closeZoom()">
+        <button class="close-button" onclick="closeZoom()">×</button>
+        <img id="zoomedImg" src="" alt="Zoomed Image">
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        
+        <div class="footer-contact">
+            <a href="https://www.instagram.com/blueon.blue_/?hl=en" target="_blank">
+                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png" alt="Instagram">
+                <p>instagram</p>
+                <p>blueOnblue</p>
+                
+            </a>
+            <a href="https://wa.me/9767980672" target="_blank">
+                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/phone.png" alt="phone">
+                <span>9767980672</span>
+            </a>
+        </div>
+        <p>&copy; 2024 blueOnblue Thrift Shop. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function zoomImage(image) {
+            const zoomedImage = document.getElementById("zoomedImage");
+            const zoomedImg = document.getElementById("zoomedImg");
+            zoomedImg.src = image.src; // Set the zoomed image source
+            zoomedImage.style.display = "flex"; // Show the zoomed image overlay
+        }
+
+        function closeZoom() {
+            document.getElementById("zoomedImage").style.display = "none"; // Hide the zoomed image overlay
+        }
+
+        function showOrderForm() {
+            document.getElementById("orderForm").style.display = "block"; // Show the order form
+        }
+
+        function showPaymentOptions() {
+            const userName = document.getElementById("userName").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+
+            // Validation
+            if (!userName || !phone || !address) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            document.getElementById("orderForm").style.display = "none"; // Hide the order form
+            document.getElementById("paymentOptions").style.display = "block"; // Show payment options
+        }
+
+        function handleCOD() {
+            const userName = document.getElementById("userName").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+
+            // Send order details to WhatsApp
+            const message = `blueOnblue Order: Name: ${userName}, Phone: ${phone}, Address: ${address}`;
+            const whatsappLink = `https://wa.me/9767980672?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank'); // Open WhatsApp
+
+            // Send order details to Instagram (you can modify this if needed)
+            const instagramMessage = `New Order from ${userName}: ${message}`;
+            // Logic to send Instagram message will go here (if applicable)
+
+            alert("Order details sent via WhatsApp!");
+            // Optionally, hide payment options or redirect
+        }
+    </script>
+</body>
+
+</html>

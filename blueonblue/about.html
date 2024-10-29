@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blueOnblue Thrift Shop</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Baskerville Old Face', serif;
+        }
+
+        /* Import Google Font as Backup */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        /* Main Colors */
+        :root {
+            --primary-color: #acc7e2;
+            --accent-color: #2f3a64;
+            --text-color: #317bb4;
+            --bg-light: #eef4fb;
+            --highlight-color: #3a69a7;
+        }
+
+        /* Background */
+        html,
+        body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-light);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--highlight-color) 100%);
+            color: white;
+            padding: 50px 10px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        /* Logo and Tagline */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 3px solid white;
+        }
+
+        .since {
+            font-size: 0.9em;
+            color: var(--bg-light);
+            font-style: italic;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #f1f1f1;
+            margin-top: 10px;
+        }
+
+        header h2 {
+            font-size: 1.4em;
+            color: white;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: var(--accent-color);
+            padding: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--highlight-color);
+        }
+
+        nav a:hover {
+            background-color: white;
+            color: var(--accent-color);
+        }
+
+        /* About Section */
+        #about {
+            padding: 60px 10%;
+            text-align: center;
+            background: url('bouddha.jpg') no-repeat center center / cover; /* Replace with your image */
+            color: white; /* Changed to white for visibility */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #about h2 {
+            font-size: 2em;
+            color: var();
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8); /* Added text shadow */
+        }
+
+        #about p {
+            font-size: 1.3em; /* Increased font size */
+            font-weight: 500; /* Made text thicker */
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8); /* Added text shadow */
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p,
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .logo {
+                width: 80px;
+                height: 80px;
+            }
+
+            header h1 {
+                font-size: 3em;
+            }
+
+            nav a {
+                padding: 12px 25px;
+            }
+
+            #about {
+                padding: 50px 20%;
+            }
+
+            #about h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="blue.png" alt="blueOnblue Logo" class="logo">
+            <span class="since">Since 2021...</span>
+        </div>
+        <div>
+            <h1>Welcome to blueOnblue</h1>
+            <p>where quality meets expectation...</p>
+            <h2>Thrift Shop in Kathmandu, Nepal</h2>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#about">About</a>
+        <a href="products.html">Products</a>
+        <a href="review.html">Reviews</a>
+        <a href="service.html">Services</a>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>
+            Established in 2021 in Kathmandu by a college girl, blueOnblue has curated a unique collection of thrift items for those 
+            looking for quality, sustainable fashion.
+        </p>
+        <p>
+            Our mission is to offer affordable and stylish thrifted goods, giving each item a new story to tell.
+        </p>
+        <p>
+            Visit us and discover our latest collection to find your next favorite piece!!
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Contact us</p>
+        <a href="https://www.instagram.com/blueon.blue_/?hl=en" target="_blank">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png" alt="Instagram Icon" />
+        </a>
+        <div class="footer-contact">
+            <div>
+                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/phone.png" alt="Phone Icon" />
+                <span>9767980672</span>
+            </div>
+            <div>
+                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/new-post.png" alt="Email Icon" />
+                <span>sisamnagarkokti@gmail.com</span>
+            </div>
+        </div>
+        <pre>&copy; 2024 blueOnblue Thrift Shop. All rights reserved.</pre>
+    </footer>
+
+</body>
+
+</html>

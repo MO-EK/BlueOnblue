@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blueOnblue Thrift Shop - Products</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Baskerville Old Face', serif;
+        }
+
+        /* Import Google Font as Backup */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        /* Main Colors */
+        :root {
+            --primary-color: #acc7e2;
+            --accent-color: #2f3a64;
+            --text-color: #317bb4;
+            --bg-light: #eef4fb;
+            --highlight-color: #3a69a7;
+        }
+
+        /* Background */
+        html,
+        body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-light);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--highlight-color) 100%);
+            color: white;
+            padding: 50px 10px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        /* Logo and Tagline */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+        }
+
+        .logo {
+            width: 100px; /* Increased size */
+            height: 100px; /* Increased size */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 3px solid white;
+        }
+
+        .since {
+            font-size: 0.9em;
+            color: var(--bg-light);
+            font-style: italic;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #f1f1f1;
+            margin-top: 10px;
+        }
+
+        header h2 {
+            font-size: 1.4em;
+            color: white;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: var(--accent-color);
+            padding: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--highlight-color);
+        }
+
+        nav a:hover {
+            background-color: white;
+            color: var(--accent-color);
+        }
+
+        /* Product Section */
+        #products {
+            padding: 60px 10%;
+            text-align: center;
+            background-color: white;
+            color: black;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #products h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap; /* Allows items to wrap */
+            justify-content: center; /* Center the products */
+        }
+
+        .product {
+            flex: 1 0 21%; /* Adjusts the basis for a responsive layout */
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid var(--highlight-color);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .product-price {
+            color: var(--highlight-color);
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        /* Hover Effects */
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p,
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product {
+                flex: 1 0 46%; /* Two products per row on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product {
+                flex: 1 0 90%; /* One product per row on very small screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="blue.png" alt="blueOnblue Logo" class="logo">
+            <span class="since">Since 2021...</span>
+        </div>
+        <div>
+            <h1>Welcome to blueOnblue</h1>
+            <p>where quality meets expectation...</p>
+            <h2>Thrift Shop in Kathmandu, Nepal</h2>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="review.html">Reviews</a>
+        <a href="service.html">Services</a>
+    </nav>
+
+    <!-- Product Section -->
+    <section id="products">
+        <h2>ON Saleeeee...!!!</h2>
+        <div class="product-container">
+            <div class="product">
+              <a href="infoprod1.html">
+              <img src="prod1.png" alt="Product 1">
+              <div class="product-name">Red top</div>
+              <div class="product-price">RS-xxxx/-</div>
+              </a>
+            </div>
+            <div class="product">
+                <a href="infoprod3.html">
+                <img src="pro3.png" alt="Product 2">
+                <div class="product-name">Dress</div>
+                <div class="product-price">Rs-xxxx/-</div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="infoprod4.html">
+                <img src="pro4.png" alt="Product 3">
+                <div class="product-name">DC martin</div>
+                <div class="product-price">Rs-xxxx/-</div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="infoprod2.html">
+                <img src="pro2.png" alt="Product 4">
+                <div class="product-name">Double sole shoes</div>
+                <div class="product-price">xxxx/-</div>
+                </a>
+            </div>
+            <!-- Add more products as needed -->
+            <div class="product">
+                <a href="infoprod5.html">
+                <img src="pro5.png" alt="Product 5">
+                <div class="product-name">Tote Bag</div>
+                <div class="product-price">RS-200 /-</div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="infoprod6.html">
+                <img src="pro6 img2 (1).png" alt="Product6 ">
+                <div class="product-name">Colourful Handbag</div>
+                <div class="product-price">RS-250 /-</div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="infoprod7.html">
+                <img src="pro7.png" alt="Product 7">
+                <div class="product-name">Black Top </div>
+                <div class="product-price">RS- xxxx/- </div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="infoprod8.html">
+                <img src="pro8.png" alt="Product 8">
+                <div class="product-name"></div>
+                <div class="product-price">RS- xxxx/-</div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="infoprod9.html">
+                <img src="pro9.png" alt="Product 9">
+                <div class="product-name">White Top</div>
+                <div class="product-price">RS- xxxx/-</div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="infoprod10.html">
+                <img src="pro10.png" alt="Product 10">
+                <div class="product-name">Book-It end's With US by Colleen Hoveer</div>
+                <div class="product-price">RS- xxxx/-</div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="infoprod11.html">
+                <img src="pro11.png" alt="Product 11">
+                <div class="product-name">Boot</div>
+                <div class="product-price">RS- xxxx/-</div>
+                </a>
+            </div>
+           
+            <!-- Add more products as needed -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Contact us</p>
+        <a href="https://www.instagram.com/blueon.blue_/?hl=en" target="_blank">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png" alt="Instagram Icon" />
+        </a>
+        <div class="footer-contact">
+            <div>
+                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/phone.png" alt="Phone Icon" />
+                <span>9767980672</span>
+            </div>
+            <div>
+                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/new-post.png" alt="Email Icon" />
+                <span>sisamnagarkokti@gmail.com</span>
+            </div>
+        </div>
+        <pre>&copy; 2024 blueOnblue Thrift Shop. All rights reserved.</pre>
+    </footer>
+
+</body>
+
+</html>
